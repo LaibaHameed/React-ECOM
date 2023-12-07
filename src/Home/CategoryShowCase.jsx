@@ -82,11 +82,11 @@ const ProductData = [
 const CategoryShowCase = () => {
     const [items, setItems] = useState(ProductData);
     const filterItem = (categItem) => {
-        const updateItems = ProductData.filter((currElem)=>{
+        const updateItems = ProductData.filter((currElem) => {
             return currElem.cate === categItem;
         });
         setItems(updateItems);
-     };
+    };
     return (
         <div className="course-section style-3 padding-tb">
             {/* shapes */}
@@ -130,7 +130,7 @@ const CategoryShowCase = () => {
                                             </div>
                                         </div>
                                         {/* content */}
-                                        <div className="category-content">
+                                        <div className="course-content">
                                             <Link to={`/shop/${product.id}`}>
                                                 <h6>{product.title}</h6>
                                             </Link>
@@ -140,8 +140,8 @@ const CategoryShowCase = () => {
                                                         {" "}
                                                         {product.brand}{" "}
                                                     </Link>
-                                                <div className="d-inline px-5"> <h6 className="d-inline px-2">{product.price}</h6> </div>
                                                 </div>
+                                                <div className="course-price"> {product.price} </div>
                                             </div>
                                         </div>
                                     </div>
