@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo/logo.png";
 
-const NavItem = () => {
+const NavItems = () => {
   const [menuToggle, setMenuToggle] = useState(false);
   const [socialToggle, setsocialToggle] = useState(false);
   const [headerFixed, setHeaderFixed] = useState(false);
@@ -18,7 +18,7 @@ const NavItem = () => {
   return (
     <header
       className={`header-section style-4 ${
-        headerFixed ? "Header-fixed fadeInUp" : ""
+        headerFixed ? "header-fixed fadeInUp" : " "
       }`}
     >
       {/* header top start */}
@@ -98,4 +98,4 @@ const NavItem = () => {
   );
 };
 
-export default NavItem;
+export default NavItems;

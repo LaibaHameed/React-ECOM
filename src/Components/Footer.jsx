@@ -140,7 +140,7 @@ const Footer = () => {
     <footer className='style-2'>
         <div className='footer-top dark-view padding-tb'>
             <div className='container'>
-                <div className='row gap-4 justify-content-center row-cols-1 row-cols-xl-4 row-cols-sm-2'>
+                <div className='row gap-4 justify-content-center row-cols-xl-5 row-cols-lg-5 row-cols-md-3 row-cols-sm-2 row-cols-1'>
                     <div className='col'>
                         <div className='footer-item our-address'>
                             <div className='footer-inner'>
