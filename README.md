@@ -15,3 +15,14 @@ in this app we use:
 4. react countup ( npm i react-countup)
 5. swiperjs ( npm i swiper)
 6. popperjs ( npm i @popperjs/core )
+
+
+
+<!-- shop -->
+const menuItems = [...new Set(Data.map((val)=> val.category))]; ?????
+
+<!-- pagination -->
+const pageNumbers = [];
+    for(let i=1; i<=Math.ceil(totalProducts/productsPerPage); i++){
+        pageNumbers.push(i);
+    }
