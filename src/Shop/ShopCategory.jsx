@@ -12,7 +12,7 @@ const ShopCategory = ({filterItem, setItem, menuItems, setProducts, selectCatego
         {
           menuItems.map((val, i)=>{
             return(
-              <button className={`m-2 ${selectCategory === val ? "bg-warning": ""}`} key={i} onClick={()=> filterItem(val)}>
+              <button className={`m-2 ${selectCategory === val ? "bg-warning" : " " }`} key={i} onClick={()=> filterItem(val)}>
                 {val}
               </button>
             )

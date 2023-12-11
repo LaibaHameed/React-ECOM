@@ -5,6 +5,8 @@ import ProductCard from './ProductCard'
 import Pagination  from './Pagination'
 import Search from './Search'
 import ShopCategory from './ShopCategory'
+import PopularPost from './PopularPost'
+import PopularTags from './PopularTags'
 
 const showResults = "Showing 01 - 12 of 139 Results"
 
@@ -76,6 +78,8 @@ const Shop = () => {
                         <aside>
                             <Search products={products} GridList={GridList} />
                             <ShopCategory filterItem={filterItem} setItem={setProducts} menuItems={menuItems} setProducts={setProducts} selectCategory={selectCategory} />
+                            <PopularPost/>
+                            <PopularTags/>
                         </aside>
                     </div>
                 </div>
