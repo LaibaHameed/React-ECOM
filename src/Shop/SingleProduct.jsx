@@ -5,6 +5,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import {Autoplay} from "swiper/modules"
 import ProductDisplay from './ProductDisplay';
+import Review from './Review';
+import PopularPost from './PopularPost';
+import PopularTags from './PopularTags';
 
 const SingleProduct = () => {
     const [product, setProduct] = useState([]);
@@ -76,12 +79,15 @@ const SingleProduct = () => {
                                 </div>
                             </div>
                             <div className='review'>
-                                Review
+                                <Review/>
                             </div>
                         </article>
                     </div>
                     <div className='col-lg-4 col-12'>
-                    Right Side
+                        <aside className='ps lg-4'>
+                            <PopularPost/>
+                            <PopularTags/>
+                        </aside>
                     </div>
                 </div>
             </div>
