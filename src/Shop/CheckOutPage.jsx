@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Modal } from 'react-bootstrap';
+import '../Components/modal.css'
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const CheckOutPage = () => {
     const [show, setShow] = useState(false);
@@ -11,6 +13,18 @@ const CheckOutPage = () => {
 
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
+
+    // direct to home page 
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const from = location.state?.from?.pathname || "/";
+
+    const handleOrderConfirm = () => {
+        alert("Your oder is placed Successfully!");
+        localStorage.removeItem("cart");
+        navigate(from, {replace: true});
+    }
   return (
     <div className='modalCard'>
         <Button variant='primary' className='py-2' onClick={handleShow}>Proceed to checkout</Button>
@@ -63,7 +77,7 @@ const CheckOutPage = () => {
                                     {/* visa tab contebt */}
                                     <div className='mt-4 mx-4'> 
                                         <div className='text-center'>
-                                            <h5>cridet card</h5>
+                                            <h5>Cridet Card</h5>
                                         </div>
                                         <div className='form mt-3'>
                                             <div className='inputbox'>
@@ -85,13 +99,50 @@ const CheckOutPage = () => {
                                                 </div>
                                             </div>
                                             <div className='px-5 pay'>
-                                                <button className='btn btn-success btn-block'>Order</button>
+                                                <button className='btn btn-success btn-block' onClick={handleOrderConfirm}>Order Now</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 {/* paypal content */}
+                                <div className={`tab-pane fade ${activeTab === "paypal" ? "show active" : ""}`}
+                                id='paypal'
+                                role='tabpanel'
+                                aria-labelledby='paypal-tab'
+                                >
+                                {/* paypal tab contebt */}
+                                    <div className='mt-4 mx-4'> 
+                                        <div className='text-center'>
+                                            <h5>Paypal Account Info</h5>
+                                        </div>
+                                        <div className='form mt-3'>
+                                            <div className='inputbox'>
+                                                <input type='email' name='name' id='name' className='form-control' required/>
+                                                <span>Enter your Name</span>
+                                            </div>
+                                            <div className='inputbox'>
+                                                <input type='text' name='number' id='number' className='form-control' min='1' max='999' required/>
+                                                <span>Your Name</span>
+                                            </div>
+                                            <div className='d-flex flex-row'>
+                                            <div className='inputbox'>
+                                                <input type='text' name='number' id='number' className='form-control' min='1' max='999' required/>
+                                                <span>Extra Info</span>
+                                            </div>
+                                            <div className='inputbox'>
+                                                <input type='text' name='number' id='number' className='form-control' min='1' max='999' required/>
+                                                <span></span>
+                                            </div>
+                                            </div>
+                                            <div className='px-5 pay'>
+                                                <button className='btn btn-success btn-block' onClick={handleOrderConfirm}>Add Paypal</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            {/* Payment desclaimer */}
+                            <p className='mt-3 mx-4 p-Disclaimer'><em>Payment Desclaimer :</em> In no event shall payment and partial payment by owner for any material or service. </p>
                         </div>
                     </div>
                 </div>
