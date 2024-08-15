@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 const desc = "Compared with other breads, like white bread, Ezekiel bread is high in protein, fiber, and various important nutrients.";
 
 const ProductDisplay = ({item}) => {
+  
     const {name,id,seller,price,ratingsCount,quantity,img} = item;
 
-    const [preQuantity, setQuantity] = useState(quantity);
+    const [preQuantity, setQuantity] = useState(1);
     const [coupon, setCoupon] = useState("");
     const [size, setSize] = useState("set size");
     const [color, setColor] = useState("set color");

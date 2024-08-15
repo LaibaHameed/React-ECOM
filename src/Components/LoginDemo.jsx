@@ -15,7 +15,6 @@ const LoginDemo = () => {
       const user = result.user;
       alert("login successfully");
     }).catch((error) => {
-      // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode)

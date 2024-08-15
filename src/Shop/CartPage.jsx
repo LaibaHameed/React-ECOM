@@ -14,55 +14,61 @@ const CartPage = () => {
   }, [])
 
   // calculate Prices
-  const calculateTotalPrice = (item) => { 
+  const calculateTotalPrice = (item) => {
     let price = item.price * item.quantity;
     return price;
   }
 
-  // handle increase Qunatity
+  // handle increase Quantity
   const handleIncrease = (item) => {
-    item.quantity += 1;
-    setCartItems([...cartItems])
-
-    // update local Storage with new cart items 
-    localStorage.setItem("cart", JSON.stringify(cartItems));
+    const updatedItems = cartItems.map(cartItem =>
+      cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+    );
+    setCartItems(updatedItems);
+    localStorage.setItem("cart", JSON.stringify(updatedItems));
   }
 
-  // handle decrease  Qunatity
+  // handle decrease Quantity
   const handleDecrease = (item) => {
-    if(item.quantity > 1){
-      item.quantity -= 1;
-      setCartItems([...cartItems])
+    if (item.quantity > 1) {
+      const updatedItems = cartItems.map(cartItem =>
+        cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
+      );
+      setCartItems(updatedItems);
+      localStorage.setItem("cart", JSON.stringify(updatedItems));
     }
-    
-    // update local Storage with new cart items 
-    localStorage.setItem("cart", JSON.stringify(cartItems));
   }
 
-    // handle Delete  item
-    const handleDeleteItem = (item) => {
-      const updateCart =  cartItems.filter((cartItem)=> cartItem.id !== item.id);
 
-      // update new cart 
-      setCartItems(updateCart);
-      updateLocalStorage(updateCart);
-    }
+  // handle Delete  item
+  const handleDeleteItem = (item) => {
+    const updateCart = cartItems.filter((cartItem) => cartItem.id !== item.id);
 
-    const updateLocalStorage = (cart)=>{
-      localStorage.setItem("cart" , JSON.stringify(cart));
-    }
+    // update new cart 
+    setCartItems(updateCart);
+    updateLocalStorage(updateCart);
+  }
 
-    // cart sub total
-    const cartSubTotal = cartItems.reduce((total, item )=>{
-      let price = total + calculateTotalPrice(item);
-      return price;
-    }, 0);
+  const updateLocalStorage = (cart) => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
 
-    // order total 
-    const orderTotal = cartSubTotal;
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    const newTotalPrice = cartItems.reduce((total, item) => total + calculateTotalPrice(item), 0);
+    setTotalPrice(newTotalPrice);
+  }, [cartItems]);
+
+  // Then replace `cartSubTotal` and `orderTotal` with `totalPrice`:
+  const cartSubTotal = totalPrice;
+  const orderTotal = totalPrice;
+
+
+
   return (
     <div>
-      <PageHeader title={"Shop Cart"} curPage={"Shop Cart"}/>
+      <PageHeader title={"Shop Cart"} curPage={"Shop Cart"} />
 
       <div className='shop-cart padding-tb'>
         <div className='container'>
@@ -81,11 +87,11 @@ const CartPage = () => {
                 </thead>
                 <tbody>
                   {
-                    cartItems.map((item, indx)=>(
+                    cartItems.map((item, indx) => (
                       <tr key={indx}>
                         <td className='product-item cat-product'>
                           <div className='p-thumb'>
-                            <Link to="/shop"> <img src={item.img} alt=''/> </Link>
+                            <Link to="/shop"> <img src={item.img} alt='' /> </Link>
                           </div>
                           <div className='p-content'>
                             <Link to="/shop">{item.name}</Link>
@@ -95,16 +101,16 @@ const CartPage = () => {
                           ${item.price}
                         </td>
                         <td className='cat-quantity'>
-                        <div className='cart-plus-minus'>
-                          <div className='dec qtybutton' onClick={()=> handleDecrease(item)}>-</div>
-                          <input className='cart-plus-minus-box' type='text' name='qtybutton' id='qtybutton' value={item.quantity} />
-                          <div className='inc qtybutton' onClick={()=> handleIncrease(item)}>+</div>
+                          <div className='cart-plus-minus'>
+                            <div className='dec qtybutton' onClick={() => handleDecrease(item)}>-</div>
+                            <input className='cart-plus-minus-box' type='text' name='qtybutton' id='qtybutton' value={item.quantity} />
+                            <div className='inc qtybutton' onClick={() => handleIncrease(item)}>+</div>
                           </div>
                         </td>
                         <td className='cat-toprice'>${calculateTotalPrice(item)}</td>
                         <td className='cat-edit'>
-                          <a href='#' onClick={()=> handleDeleteItem(item)}>
-                            <img src={delImageUrl} alt='del'/>
+                          <a href='#' onClick={() => handleDeleteItem(item)}>
+                            <img src={delImageUrl} alt='del' />
                           </a>
                         </td>
                       </tr>
@@ -124,7 +130,7 @@ const CartPage = () => {
                 </form>
                 <form className='cart-checkout'>
                   <input type='submit' value="Update Cart" />
-                  <div> <CheckOutPage/> </div>
+                  <div> <CheckOutPage /> </div>
                 </form>
               </div>
               {/* checkout box ends */}
@@ -147,7 +153,7 @@ const CartPage = () => {
                         </span>
                       </div>
                       <div className='outline-select shipping-select'>
-                      <select>
+                        <select>
                           <option value="uk">New York</option>
                           <option value="bd">Dakha</option>
                           <option value="pak">Islamabad</option>
@@ -178,7 +184,7 @@ const CartPage = () => {
                         <li>
                           <span className='pull-left'>Order Total</span>
                           {/* <p className='pull-right'>${orderTotal.toFixed(2)}</p> */}
-                          <p className='pull-right'>${orderTotal.toFixed(2) }</p>
+                          <p className='pull-right'>${orderTotal.toFixed(2)}</p>
                         </li>
                       </ul>
                     </div>
